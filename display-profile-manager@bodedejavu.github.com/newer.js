@@ -140,7 +140,7 @@ const DisplayProfileManager = new Lang.Class({
         
     _createMenu: function() {
         this.item.menu.removeAll();
-        this.item.status.text = '';
+        this.item.label.text = '';
         this._clearKeybindings();
         
         this._insertProfileItems();
@@ -161,7 +161,7 @@ const DisplayProfileManager = new Lang.Class({
             for (let i = 0; i < this._profiles.length; i++) {
                 is_active = this._addProfileItem(i);
                 if (is_active == true && active_set == false) {
-                    this.item.status.text = this._profiles[i][0];
+                    this.item.label.text = this._profiles[i][0];
                     active_set = true;
                     }
                 }
@@ -212,7 +212,7 @@ const DisplayProfileManager = new Lang.Class({
                 keybinding_name = Common.SETTINGS_KEY_KEYBINDING_PROFILE + (profileIndex+1).toString();
                 keybinding_handler = Lang.bind(this, this._setProfileFromKeybinding, this._profiles[profileIndex]);
                 if (Main.wm.addKeybinding) {
-                    keybinding = Main.wm.addKeybinding(keybinding_name, this._settings, Meta.KeyBindingFlags.NONE, Shell.KeyBindingMode.NORMAL | Shell.KeyBindingMode.MESSAGE_TRAY, keybinding_handler);
+                    keybinding = Main.wm.addKeybinding(keybinding_name, this._settings, Meta.KeyBindingFlags.NONE, Shell.ActionMode.NORMAL | Shell.ActionMode.MESSAGE_TRAY, keybinding_handler);
                     }
                 else {
                     keybinding = global.display.add_keybinding(keybinding_name, this._settings, Meta.KeyBindingFlags.NONE, keybinding_handler);
